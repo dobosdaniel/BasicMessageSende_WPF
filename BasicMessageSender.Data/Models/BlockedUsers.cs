@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace BasicMessageSender.Data.Models
 {
-    class BlockedUser
+    public class BlockedUsers
     {
+        public int Id { get; set; }
+        public User BlockedUser { get; set; }
+        public int BlockedUserId { get; set; }
+
     }
 }

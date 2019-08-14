@@ -19,7 +19,7 @@ namespace BasicMessageSender.Data.Models
 
             //base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()
-                        .HasMany<BlockedUsers>(g => g.BlockedUsers)
+                        .HasMany(g => g.BlockedUsers)
                         .WithRequired(s => s.BlockedUser)
                         .WillCascadeOnDelete();
                         //.HasForeignKey<int>(s => s.BlockedUserId);

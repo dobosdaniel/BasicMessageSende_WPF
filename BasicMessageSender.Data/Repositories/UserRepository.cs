@@ -31,29 +31,48 @@ namespace BasicMessageSender.Data.Repositories
                     user.IsHidden = true;
             }
         }
-        public void BlockUsersFromList(string blockedUser)
+        public void BlockUser(User logedUser, string blockedUser)
         {
-
+            using(var Context = new BMSContext())
+            {
+                BlockedUsers bu = new BlockedUsers();
+                bu.BlockedUser = Context.Users.Where(u => u.Username == blockedUser).FirstOrDefault();
+                logedUser.BlockedUsers.Add(bu);
+                Context.SaveChangesAsync();
+            }
         }
-        public void RegisterUser(string userName, string firstName, string lastName, SecureString password, string phoneNumber)
+        public void RegisterUser(string userName, string firstName, string lastName, string password, string phoneNumber)
         {
             if (userName is null)
                 throw new Exception("UserName cannot be null.");
             if (firstName is null)
                 throw new Exception("FirstName cannot be null.");
-
+            using (var Context = new BMSContext())
+            {
+                User newUser = new User();
+                newUser.Username = userName;
+                newUser.FirstName = firstName;
+                newUser.Surname = lastName;
+                newUser.Password = password;
+                newUser.PhoneNumber = phoneNumber;
+                Context.Users.Add(newUser);
+                Context.SaveChangesAsync();
+            }
         }
         public List<User> GetAllUsers(string username)
         {
-            User user = GetUserByUserName(username);
+            using (var Context = new BMSContext())
+            {
+                User user = GetUserByUserName(username);
 
-            return context.Users.Where(u => u.Username != username && !u.IsHidden).ToList();
+                return Context.Users.Where(u => u.Username != username && !u.IsHidden).ToList();
+            }
         }
-        public bool Login(string userName, string password)
+        public User Login(string userName, string password)
         {
             using (var Context = new BMSContext())
             {
-                return Context.Users.Where(u => u.Username == userName && u.Password == password).Count() > 0;
+                return Context.Users.Where(u => u.Username == userName && u.Password == password).FirstOrDefault();
             }
         }
 
