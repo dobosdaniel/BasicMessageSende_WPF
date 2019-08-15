@@ -33,14 +33,16 @@ namespace BMS.UI
         {
             try
             {
-                userRepository.RegisterUser(UserNametextBox.Text, FirstNametextBox.Text, SurnametextBox.Text, PasswordtextBox.Text, PhoneNumbertextBox.Text);
+                userRepository.RegisterUser(UserNametextBox.Text, FirstNametextBox.Text, SurnametextBox.Text, PasswordtextBox.Text, PhoneNumbertextBox.Text, EmailtextBox.Text);
                 User loggedUser = userRepository.GetUserByUserName(UserNametextBox.Text);
                 if (loggedUser == null)
                     throw new Exception("User had not been registered, please register again!");
                 else
                 {
                     //Send Confirmation email
-                    MessageWindow mw = new MessageWindow();
+                    MessageWindow mw = new MessageWindow(loggedUser);
+                    mw.Show();
+                    this.Close();
                 }
 
             }

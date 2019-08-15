@@ -41,7 +41,7 @@ namespace BasicMessageSender.Data.Repositories
                 Context.SaveChangesAsync();
             }
         }
-        public void RegisterUser(string userName, string firstName, string lastName, string password, string phoneNumber)
+        public void RegisterUser(string userName, string firstName, string lastName, string password, string phoneNumber, string email)
         {
             if (userName is null)
                 throw new Exception("UserName cannot be null.");
@@ -55,8 +55,10 @@ namespace BasicMessageSender.Data.Repositories
                 newUser.Surname = lastName;
                 newUser.Password = password;
                 newUser.PhoneNumber = phoneNumber;
+                newUser.Email = email;
                 Context.Users.Add(newUser);
-                Context.SaveChangesAsync();
+
+                Context.SaveChanges();
             }
         }
         public List<User> GetAllUsers(string username)
