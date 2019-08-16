@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.UI", "BMS.UI\BMS.UI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMessageSender.Data", "BasicMessageSender.Data\BasicMessageSender.Data.csproj", "{DE524B64-C4A3-41BC-9A0E-7209DA545A61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSender\MailSender.csproj", "{E3DBC670-5A44-4790-8ADE-E47ECE037359}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityHelper", "SecurityHelper\SecurityHelper.csproj", "{218453F8-7B2E-491A-B47A-1F385CD2A3C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{DE524B64-C4A3-41BC-9A0E-7209DA545A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE524B64-C4A3-41BC-9A0E-7209DA545A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE524B64-C4A3-41BC-9A0E-7209DA545A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3DBC670-5A44-4790-8ADE-E47ECE037359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3DBC670-5A44-4790-8ADE-E47ECE037359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3DBC670-5A44-4790-8ADE-E47ECE037359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3DBC670-5A44-4790-8ADE-E47ECE037359}.Release|Any CPU.Build.0 = Release|Any CPU
+		{218453F8-7B2E-491A-B47A-1F385CD2A3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218453F8-7B2E-491A-B47A-1F385CD2A3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218453F8-7B2E-491A-B47A-1F385CD2A3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218453F8-7B2E-491A-B47A-1F385CD2A3C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

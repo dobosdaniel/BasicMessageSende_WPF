@@ -30,10 +30,13 @@ namespace BMS.UI
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            bool result = userRepository.Login(userNameTextBox.Text, passwordBox.Password);
-            if(result)
+            User loggedUser = userRepository.Login(userNameTextBox.Text, passwordBox.Password);
+            if(loggedUser != null)
             {
-                MessageBox.Show("OK");
+                MessageBox.Show("Login successful!");
+                MessageWindow mw = new MessageWindow(loggedUser);
+                mw.Show();
+                this.Close();
             }
             else
             {

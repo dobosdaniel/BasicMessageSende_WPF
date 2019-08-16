@@ -7,13 +7,13 @@ namespace BasicMessageSender.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class Init_1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init_1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201908141336264_Init"; }
+            get { return "201908161144317_Init_1"; }
         }
         
         string IMigrationMetadata.Source

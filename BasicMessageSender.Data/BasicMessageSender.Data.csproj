@@ -115,9 +115,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201908141336264_Init.cs" />
-    <Compile Include="Migrations\201908141336264_Init.Designer.cs">
-      <DependentUpon>201908141336264_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201908161144317_Init_1.cs" />
+    <Compile Include="Migrations\201908161144317_Init_1.Designer.cs">
+      <DependentUpon>201908161144317_Init_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlockedUsers.cs" />
@@ -133,9 +133,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908141336264_Init.resx">
-      <DependentUpon>201908141336264_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908161144317_Init_1.resx">
+      <DependentUpon>201908161144317_Init_1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MailSender\MailSender.csproj">
+      <Project>{E3DBC670-5A44-4790-8ADE-E47ECE037359}</Project>
+      <Name>MailSender</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecurityHelper\SecurityHelper.csproj">
+      <Project>{218453F8-7B2E-491A-B47A-1F385CD2A3C6}</Project>
+      <Name>SecurityHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,10 +19,20 @@ namespace BasicMessageSender.Data.Models
 
             //base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()
-                        .HasMany<BlockedUsers>(g => g.BlockedUsers)
-                        .WithRequired(s => s.BlockedUser)
-                        .WillCascadeOnDelete();
-                        //.HasForeignKey<int>(s => s.BlockedUserId);
+                        .HasMany(g => g.BlockedUsers)
+                        .WithRequired(s => s.BlockerUser)
+                        .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Message>()
+            //            .HasOptional(m => m.Receiver)
+            //            .WithOptionalDependent()
+            //            .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Message>()
+            //            .HasOptional(m => m.Sender)
+            //            .WithOptionalDependent()
+            //            .WillCascadeOnDelete(false);
+            //.HasForeignKey<int>(s => s.BlockedUserId);
         }
         //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //    {
