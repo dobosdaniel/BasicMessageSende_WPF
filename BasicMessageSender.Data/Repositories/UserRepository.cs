@@ -1,7 +1,10 @@
 ﻿using BasicMessageSender.Data.Models;
+using MailSender;
+using SecurityHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -56,7 +59,12 @@ namespace BasicMessageSender.Data.Repositories
                 throw new Exception("UserName already exist, please choose another one.");
 
 
-
+            //SecureString ss = new NetworkCredential("", password).SecurePassword;
+            //newUser.Password = SecurityHelper.EncryptString(ss);
+            //newUser.CredentialEncryptionHash= SecurityHelper.MD5Hash(string.Format("{0}{1}",
+            //userName,
+            //password));
+            //EncryptPassword(ref password);
             using (var Context = new BMSContext())
             {
                 User newUser = new User();
@@ -67,10 +75,14 @@ namespace BasicMessageSender.Data.Repositories
                 newUser.PhoneNumber = phoneNumber;
                 newUser.Email = email;
                 Context.Users.Add(newUser);
-
                 Context.SaveChanges();
+
+                //TODO:Check mailsending settings
+                //if (Context.SaveChanges() > 0)
+                //    MailSender.MailSender.Send(newUser.Email, "BMS Confirmation", "Dear" + newUser.Surname + ", \nThank your for registering in BMS Message sending application. \nKind regards,\nBMS Team");
             }
         }
+
         public List<User> GetAllUsers(string username)
         {
             using (var Context = new BMSContext())
@@ -101,8 +113,19 @@ namespace BasicMessageSender.Data.Repositories
         {
             using (var Context = new BMSContext())
             {
+                //SecureString ss = new NetworkCredential("", password).SecurePassword;
+                //User loggedInUser = Context.Users.Where(u => u.Username == userName).FirstOrDefault();
+                //if (ss == SecurityHelper.SecurityHelper.DecryptString(loggedInUser.Password))
+                //    return loggedInUser;
+                //else return null;
+
                 return Context.Users.Where(u => u.Username == userName && u.Password == password).FirstOrDefault();
             }
+        }
+        private void EncryptPassword(ref string password)
+        {
+            SecureString ss = new NetworkCredential("", password).SecurePassword;
+            password = SecurityHelper.SecurityHelper.EncryptString(ss);
         }
 
     }

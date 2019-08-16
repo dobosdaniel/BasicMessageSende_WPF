@@ -37,6 +37,7 @@ namespace BMS.UI
 
 
             MessagesDataGrid.ItemsSource = messageRepository.GetAllReceivedMessagesForUser(_loggedUser.Username);
+            messageNumberLabel.Content = "Daily messages: " + messageRepository.GetSentMessagesNumberByUserSentToday(_loggedUser.Username);
         }
 
         private void CommonCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)

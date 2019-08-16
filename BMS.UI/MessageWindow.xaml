@@ -38,13 +38,14 @@
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
         <Label x:Name="MessageLabel" Content="Received Messages:" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="124"/>
-        <ToolBarTray HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="452">
-            <ToolBar>
+        <ToolBarTray HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="534" Grid.ColumnSpan="2">
+            <ToolBar Margin="0,0,-530,0">
                 <Button x:Name="NewMessageButton" Content="New Message" Click="NewMessageButton_Click"/>
                 <Button x:Name="HideButton" Click="HideButton_Click"/>
                 <Button x:Name="LogoutButton" Content="Logout" Click="LogoutButton_Click"/>
             </ToolBar>
         </ToolBarTray>
+        <Label x:Name="messageNumberLabel" Content="Daily messages:" HorizontalAlignment="Left" Margin="372,27,0,0" VerticalAlignment="Top" Width="117"/>
 
     </Grid>
 

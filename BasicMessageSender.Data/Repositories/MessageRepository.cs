@@ -16,6 +16,8 @@ namespace BasicMessageSender.Data.Repositories
         {
             using (var Context = new BMSContext())
             {
+                if (GetSentMessagesNumberByUserSentToday(senderUserName) >= 5)
+                    throw new Exception("Numbers of messages per day reach the limit (5)! ");
                 Message newMessage = new Message();
                 newMessage.Sender = Context.Users.Where(u => u.Username.Equals(senderUserName)).FirstOrDefault();
                 newMessage.Receiver = Context.Users.Where(u => u.Username.Equals(receiverUserName)).FirstOrDefault();
@@ -49,7 +51,8 @@ namespace BasicMessageSender.Data.Repositories
         {
             using (var Context = new BMSContext())
             {
-                return Context.Messages.Where(m => m.Sender.Username == userName && m.Sent == DateTime.Today).Count();
+                DateTime today = DateTime.Now.AddHours(-24);
+                return Context.Messages.Where(m => m.Sender.Username == userName && m.Sent >= today).Count();
             }
         }
         public Message GetMessageById(int id)
