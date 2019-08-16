@@ -3,7 +3,7 @@ namespace BasicMessageSender.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class Init_1 : DbMigration
     {
         public override void Up()
         {
@@ -44,25 +44,25 @@ namespace BasicMessageSender.Data.Migrations
                         Sent = c.DateTime(nullable: false),
                         Data = c.String(),
                         IsRead = c.Boolean(nullable: false),
-                        Receiver_Id = c.Int(),
-                        Sender_Id = c.Int(),
+                        SenderId = c.Int(nullable: false),
+                        ReceiverId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.Receiver_Id)
-                .ForeignKey("dbo.Users", t => t.Sender_Id)
-                .Index(t => t.Receiver_Id)
-                .Index(t => t.Sender_Id);
+                .ForeignKey("dbo.Users", t => t.ReceiverId, cascadeDelete: false)
+                .ForeignKey("dbo.Users", t => t.SenderId, cascadeDelete: false)
+                .Index(t => t.SenderId)
+                .Index(t => t.ReceiverId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Messages", "Sender_Id", "dbo.Users");
-            DropForeignKey("dbo.Messages", "Receiver_Id", "dbo.Users");
+            DropForeignKey("dbo.Messages", "SenderId", "dbo.Users");
+            DropForeignKey("dbo.Messages", "ReceiverId", "dbo.Users");
             DropForeignKey("dbo.BlockedUsers", "BlockedUserId", "dbo.Users");
             DropForeignKey("dbo.BlockedUsers", "BlockerUserId", "dbo.Users");
-            DropIndex("dbo.Messages", new[] { "Sender_Id" });
-            DropIndex("dbo.Messages", new[] { "Receiver_Id" });
+            DropIndex("dbo.Messages", new[] { "ReceiverId" });
+            DropIndex("dbo.Messages", new[] { "SenderId" });
             DropIndex("dbo.BlockedUsers", new[] { "BlockedUserId" });
             DropIndex("dbo.BlockedUsers", new[] { "BlockerUserId" });
             DropTable("dbo.Messages");

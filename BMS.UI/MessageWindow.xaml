@@ -5,12 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BMS.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListBox x:Name="UsersListBox" HorizontalAlignment="Left" Height="137" Margin="29,103,0,0" VerticalAlignment="Top" Width="98"/>
-        <TextBox x:Name="MessageTextBox" HorizontalAlignment="Left" Height="146" Margin="182,103,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="224"/>
-        <Button x:Name="SendButton" Content="Send" HorizontalAlignment="Left" Margin="82,345,0,0" VerticalAlignment="Top" Width="75" Click="SendButton_Click"/>
-        <Button x:Name="HideButton" Content="Hide myself" HorizontalAlignment="Left" Height="20" Margin="246,345,0,0" VerticalAlignment="Top" Width="76"/>
+        ResizeMode="NoResize"
+        Title="Messages" Height="430" Width="540">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="CommonCommandBinding_CanExecute" />
+        <CommandBinding Command="Open" CanExecute="CommonCommandBinding_CanExecute" />
+        <CommandBinding Command="Save" CanExecute="CommonCommandBinding_CanExecute" />
+    </Window.CommandBindings>
+    <Grid Margin="0,0,0,1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="521*"/>
+            <ColumnDefinition Width="47*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="label" Content="Logged in as: " HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="MessagesDataGrid" HorizontalAlignment="Left" Height="293" Margin="10,94,0,0" VerticalAlignment="Top" Width="512" AutoGenerateColumns="False" SelectionChanged="MessagesDataGrid_SelectionChanged" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sender" Binding="{Binding Sender.Username}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Message" Binding="{Binding Data}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Seen" Binding="{Binding IsRead}" >
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style>
+                            <EventSetter Event="CheckBox.Checked" Handler="OnChecked"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Sent}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Details}" Margin="10" />
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Label x:Name="MessageLabel" Content="Received Messages:" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="124"/>
+        <ToolBarTray HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="452">
+            <ToolBar>
+                <Button x:Name="NewMessageButton" Content="New Message" Click="NewMessageButton_Click"/>
+                <Button x:Name="HideButton" Click="HideButton_Click"/>
+                <Button x:Name="LogoutButton" Content="Logout" Click="LogoutButton_Click"/>
+            </ToolBar>
+        </ToolBarTray>
 
     </Grid>
+
 </Window>

@@ -31,13 +31,41 @@ namespace BMS.UI
             messageRepository = new MessageRepository();
             userRepository = new UserRepository();
             InitializeComponent();
-            UsersListBox.ItemsSource = userRepository.GetAllUsers(_loggedUser.Username);
             
+            label.Content = "Logged in as: " + _loggedUser.FirstName + " " + _loggedUser.Surname;
+            HideButton.Content = _loggedUser.IsHidden ? "Unhide" : "Hide";
+
+
+            MessagesDataGrid.ItemsSource = messageRepository.GetAllReceivedMessagesForUser(_loggedUser.Username);
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        private void CommonCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void HideButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideButton.Content = userRepository.HideFromList(_loggedUser) ? "Unhide" : "Hide";
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            new LoginWindow().Show();
+            this.Close();
+        }
+        private void NewMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            new NewMessageWindow(_loggedUser).Show();
+        }
+
+        private void MessagesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        void OnChecked(object sender, RoutedEventArgs e)
+        {
+            int a = 5; 
+            throw new NotImplementedException();
         }
     }
 }

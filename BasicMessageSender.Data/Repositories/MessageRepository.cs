@@ -12,26 +12,27 @@ namespace BasicMessageSender.Data.Repositories
         public MessageRepository()
         {
         }
-        public void AddMessage(Message newMessage)
+        public int AddMessage(string senderUserName, string receiverUserName, string message)
         {
             using (var Context = new BMSContext())
             {
-                //Message newMessage = new Message();
-                //newMessage.Sender = Context.Users.Where(u => u.Username.Equals(senderUserName)).FirstOrDefault();
-                //newMessage.Receiver = Context.Users.Where(u => u.Username.Equals(receiverUserName)).FirstOrDefault();
-                //newMessage.IsRead = false;
-                //newMessage.Sent = DateTime.Now;
+                Message newMessage = new Message();
+                newMessage.Sender = Context.Users.Where(u => u.Username.Equals(senderUserName)).FirstOrDefault();
+                newMessage.Receiver = Context.Users.Where(u => u.Username.Equals(receiverUserName)).FirstOrDefault();
+                newMessage.IsRead = false;
+                newMessage.Sent = DateTime.Now;
+                newMessage.Data = message;
 
 
                 Context.Messages.Add(newMessage);
-                Context.SaveChangesAsync();
+                return Context.SaveChanges();
             }
         }
-        public IQueryable<Message> GetAllReceivedMessagesForUser(string userName)
+        public List<Message> GetAllReceivedMessagesForUser(string userName)
         {
             using (var Context = new BMSContext())
             {
-                return Context.Messages.Where(u => u.Receiver.Username == userName);
+                return Context.Messages.Include("Sender").Include("Receiver").Where(u => u.Receiver.Username == userName).ToList();
             }
         }
         

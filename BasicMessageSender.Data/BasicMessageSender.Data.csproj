@@ -115,9 +115,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201908150031073_Init.cs" />
-    <Compile Include="Migrations\201908150031073_Init.Designer.cs">
-      <DependentUpon>201908150031073_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201908161144317_Init_1.cs" />
+    <Compile Include="Migrations\201908161144317_Init_1.Designer.cs">
+      <DependentUpon>201908161144317_Init_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlockedUsers.cs" />
@@ -133,8 +133,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908150031073_Init.resx">
-      <DependentUpon>201908150031073_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908161144317_Init_1.resx">
+      <DependentUpon>201908161144317_Init_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
